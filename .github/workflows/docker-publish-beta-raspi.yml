@@ -5,7 +5,7 @@ on:
       - 'beta'
 jobs:
   build:
-    if: github.repository_owner == 'TandoorRecipes'
+    #if: github.repository_owner == 'TandoorRecipes'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -32,7 +32,7 @@ jobs:
       - name: Build and publish image
         uses: ilteoood/docker_buildx@master
         with:
-          publish: true
+          publish: false
           imageName: vabene1111/recipes
           tag: beta-raspi
           dockerFile: Dockerfile-raspi
@@ -40,9 +40,9 @@ jobs:
           dockerUser: ${{ secrets.DOCKER_USERNAME }}
           dockerPassword: ${{ secrets.DOCKER_PASSWORD }}
       # Send discord notification
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_BETA_WEBHOOK }}
-        uses: Ilshidur/action-discord@0.3.2
-        with:
-          args: '🚀 The BETA Image has been updated! 🥳'
+      #- name: Discord notification
+      #  env:
+      #    DISCORD_WEBHOOK: ${{ secrets.DISCORD_BETA_WEBHOOK }}
+      #  uses: Ilshidur/action-discord@0.3.2
+      #  with:
+      #    args: '🚀 The BETA Image has been updated! 🥳'
